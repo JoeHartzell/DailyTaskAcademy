@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8082:8082"
+    environment:
+      - PORT=8082
+      - MONGODB_URI=mongodb://mongo:27017/dailytaskacademy
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./client:/usr/share/nginx/html
+    environment:
+      - API_BASE_URL=http://localhost:8082/api
+
+  admin:
+    image: nginx:alpine
+    ports:
+      - "8081:80"
+    volumes:
+      - ./admin:/usr/share/nginx/html
+    environment:
+      - API_BASE_URL=http://localhost:8082/api
+
+volumes:
+  mongo-data:

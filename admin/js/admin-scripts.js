@@ -1,5 +1,5 @@
 // Base URL for API requests
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'http://localhost:8082';
 
 // Helper function to retrieve the admin JWT token from local storage
 function getAdminToken() {
@@ -621,35 +621,34 @@ async function fetchWithdrawals() {
 
 // Render withdrawals in the table
 function renderWithdrawals(withdrawals) {
-  const tableBody = document.getElementById('withdrawals-table');
-  if (tableBody) {
-    tableBody.innerHTML = '';
-    withdrawals.forEach((w) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
+    const tableBody = document.getElementById('withdrawals-table');
+    if (tableBody) {
+        tableBody.innerHTML = '';
+        withdrawals.forEach((w) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
         <td>${w.userId}</td>
         <td>₦${w.amount.toLocaleString('en-NG')}</td>
         <td>${new Date(w.date).toLocaleDateString()}</td>
         <td>${w.status}</td>
         <td>
           <button class="btn btn-primary" onclick="viewUserDetails('${w.userId}')">View Details</button>
-          ${
-            w.status === 'pending'
-              ? `
+          ${w.status === 'pending'
+                    ? `
                 <button class="btn btn-success" onclick="approveWithdrawal('${w._id}')">Approve</button>
                 <button class="btn btn-danger" onclick="declineWithdrawal('${w._id}')">Decline</button>
               `
-              : w.status === 'approved'
-              ? `
+                    : w.status === 'approved'
+                        ? `
                 <button class="btn btn-success" onclick="markAsPaid('${w._id}')">Complete</button>
               `
-              : ''
-          }
+                        : ''
+                }
         </td>
       `;
-      tableBody.appendChild(row);
-    });
-  }
+            tableBody.appendChild(row);
+        });
+    }
 }
 
 // Approve withdrawal

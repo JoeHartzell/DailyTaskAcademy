@@ -1,5 +1,5 @@
 // Base URL for API requests
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'http://localhost:8082';
 
 // Helper function to retrieve the JWT token from local storage
 function getToken() {
@@ -335,7 +335,7 @@ async function initDashboardPage() {
 
     let player, videoWatched = false;
     // Initialize YouTube player when API is ready
-    window.onYouTubeIframeAPIReady = function() {
+    window.onYouTubeIframeAPIReady = function () {
         const playerElement = document.getElementById('youtube-player');
         if (playerElement) {
             player = new YT.Player('youtube-player', {
@@ -359,7 +359,7 @@ async function initDashboardPage() {
     const taskButton = document.getElementById('complete-task-btn');
     const notification = document.getElementById('task-notification');
     if (taskButton && notification) {
-        taskButton.addEventListener('click', async function(e) {
+        taskButton.addEventListener('click', async function (e) {
             e.preventDefault();
             taskButton.disabled = true;
             if (taskCompleted) {
@@ -1445,7 +1445,7 @@ function initLogoutPage() {
     const notification = document.getElementById('logout-notification');
     const returnLink = document.getElementById('return-to-id');
     if (logoutForm && notification) {
-        logoutForm.addEventListener('submit', async function(e) {
+        logoutForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const submitBtn = logoutForm.querySelector('button');
             submitBtn.disabled = true;

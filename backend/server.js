@@ -28,7 +28,7 @@ app.set('io', io);
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/user'));
 app.use('/api/admin', require('./routes/admin'));
-app.use('/api/admin/emails', require('./routes/email'));
+app.use('/api/admin/emails', require('./routes/emails'));
 app.use('/api/admin/notifications', require('./routes/notifications'));
 app.use('/api/admin/referrals', require('./routes/referrals'));
 app.use('/api/admin/tasks', require('./routes/tasks'));
